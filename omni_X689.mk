@@ -40,3 +40,11 @@ PRODUCT_MANUFACTURER := Infinix
 # HACK: Set vendor patch level
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2099-12-31
+
+PRODUCT_GMS_CLIENTID_BASE := android-infinix
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRIVATE_BUILD_DESC="vnd_x689_h696-user 11 RP1A.200720.011 237644 release-keys"
+
+BUILD_FINGERPRINT := Infinix/X689-GL/Infinix-X689:11/RP1A.200720.011/220210V480:user/release-keys
+
