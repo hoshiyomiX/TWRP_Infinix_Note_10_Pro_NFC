@@ -159,5 +159,7 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 # PBRP specific build flags
 PB_DISABLE_DEFAULT_TREBLE_COMP := true
 PB_DISABLE_DEFAULT_DM_VERITY := true
+
+# PB Torch
 PB_TORCH_PATH := /sys/devices/virtual/torch/torch/torch_level
 PB_TORCH_MAX_BRIGHTNESS := 1
