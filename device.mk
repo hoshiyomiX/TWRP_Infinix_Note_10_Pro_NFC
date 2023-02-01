@@ -60,10 +60,6 @@ PRODUCT_TARGET_VNDK_VERSION := 30
 # API
 PRODUCT_SHIPPING_API_LEVEL := 30
 
-#Properties
-TW_OVERRIDE_SYSTEM_PROPS := \
-    "ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental"
-
 # Fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock
