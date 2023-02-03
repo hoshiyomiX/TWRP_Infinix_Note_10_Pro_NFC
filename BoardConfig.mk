@@ -122,6 +122,9 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_USE_FSCRYPT_POLICY := 2
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
@@ -151,6 +154,9 @@ TW_H_OFFSET := -120
 ​TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_REPACKTOOLS := true
+
+# Maintainer/Version
+TW_DEVICE_VERSION := Miichon
 
 # logcd
 TWRP_INCLUDE_LOGCAT := true
