@@ -43,14 +43,11 @@ TARGET_BOARD_PLATFORM := mt6768
 PRODUCT_PLATFORM := mt6768
 
 # Kernel
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x07c08000
 BOARD_KERNEL_TAGS_OFFSET := 0x0bc08000
-
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_BOOTIMG_HEADER_VERSION := 2
@@ -59,6 +56,19 @@ BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+
+# Kernel - prebuilt
+TARGET_FORCE_PREBUILT_KERNEL := true
+ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+BOARD_INCLUDE_DTB_IN_BOOTIMG := 
+endif
+
+# Default kernel Source 
+TARGET_KERNEL_CONFIG := X689_defconfig
+TARGET_KERNEL_SOURCE := kernel/infinix/X689
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := Infinix-X689,Infinix-X689B
@@ -99,10 +109,10 @@ BOARD_USES_METADATA_PARTITION := true
 BOARD_USES_METADATA_ENCRYPTION := true
 
 # Dynamic Partition
-BOARD_SUPER_PARTITION_SIZE := 4294967296
-BOARD_SUPER_PARTITION_GROUPS := main
-BOARD_MAIN_SIZE := 4294967296
-BOARD_MAIN_PARTITION_LIST := system vendor product system_ext
+BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
+BOARD_SUPER_PARTITION_GROUPS := infinix_dynamic_partitions
+BOARD_INFINIX_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor product
+BOARD_INFINIX_DYNAMIC_PARTITIONS_SIZE := 9122611200 # TODO: Fix hardcoded value
 
 # File systems
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -115,6 +125,14 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 # AB
 AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS += \
+    system \
+    system_ext \
+    vendor \
+    product \
+    boot \
+    vbmeta_vendor \
+    vbmeta_system
 
 # Workaround for copying error vendor files to recovery ramdisk
 TARGET_COPY_OUT_PRODUCT := product
@@ -123,7 +141,6 @@ TARGET_COPY_OUT_VENDOR := vendor
 # Crypto
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_USE_FSCRYPT_POLICY := 2
 
 # Additional binaries & libraries needed for recovery
