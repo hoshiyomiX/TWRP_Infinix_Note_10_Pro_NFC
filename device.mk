@@ -54,6 +54,10 @@ PRODUCT_PACKAGES += \
     update_verifier \
     update_engine_sideload
 
+# DFE
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.dm_default_key.options_format.version=2
+
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := 30
 
