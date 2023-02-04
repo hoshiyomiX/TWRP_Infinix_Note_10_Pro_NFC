@@ -58,6 +58,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.volume.metadata.method=dm-default-key \
     ro.crypto.dm_default_key.options_format.version=2 \
+    ro.crypto.uses_fs_ioc_add_encryption_key=true \
     ro.crypto.volume.options=::v2
 
 # VNDK
