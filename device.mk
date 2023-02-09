@@ -54,23 +54,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     bootctrl
 
-# MTK Plpath Utils
-PRODUCT_PACKAGES += \
-    mtk_plpath_utils.recovery
-
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
-    cppreopts.sh \
     update_engine \
     update_verifier \
     update_engine_sideload
-
-# OEM otacerts
-PRODUCT_EXTRA_RECOVERY_KEYS += \
-    $(LOCAL_PATH)/security/infinix
 
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := 30
