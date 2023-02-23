@@ -163,7 +163,7 @@ TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # Maintainer/Version
-TW_DEVICE_VERSION := 3.6.2_11
+TW_DEVICE_VERSION := 3.6.2
 
 # logcd
 TWRP_INCLUDE_LOGCAT := true
