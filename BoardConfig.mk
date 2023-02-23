@@ -163,7 +163,7 @@ TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # Maintainer/Version
-TW_DEVICE_VERSION := Miichon
+TW_DEVICE_VERSION := 3.6.2_11
 
 # logcd
 TWRP_INCLUDE_LOGCAT := true
