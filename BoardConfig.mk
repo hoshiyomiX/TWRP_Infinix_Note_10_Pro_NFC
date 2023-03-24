@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020 The TWRP Open Source Project
+# Copyright (C) 2023 The TWRP Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := mt6768
+TARGET_BOOTLOADER_BOARD_NAME := CY-X689-H696-G
 TARGET_NO_BOOTLOADER := true
 
 # Platform
@@ -86,6 +86,7 @@ BOARD_ROOT_EXTRA_FOLDERS += metadata
 
 # AVB
 BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 BOARD_AVB_VBMETA_SYSTEM := system product
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
@@ -161,6 +162,7 @@ TW_H_OFFSET := -120
 ​TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_REPACKTOOLS := true
+TW_FRAMERATE := 60
 
 # Maintainer/Version
 TW_DEVICE_VERSION := 3.6.2
