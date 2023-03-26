@@ -132,6 +132,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
@@ -162,6 +163,7 @@ TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_FRAMERATE := 60
+TW_USE_FSCRYPT_POLICY := 2
 
 # Maintainer/Version
 TW_DEVICE_VERSION := Nomercy
