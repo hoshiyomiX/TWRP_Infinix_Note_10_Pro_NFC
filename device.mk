@@ -59,6 +59,7 @@ PRODUCT_PACKAGES_DEBUG += \
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
+    cppreopts.sh \
     update_engine \
     update_verifier \
     update_engine_sideload
@@ -77,3 +78,7 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
     fastbootd \
     resetprop
+    
+# OEM otacerts
+PRODUCT_EXTRA_RECOVERY_KEYS += \
+    $(LOCAL_PATH)/security/infinix
