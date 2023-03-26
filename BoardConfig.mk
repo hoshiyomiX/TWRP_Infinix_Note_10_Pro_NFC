@@ -156,12 +156,13 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
-​TW_Y_OFFSET := 120
+TW_Y_OFFSET := 120
 TW_H_OFFSET := -120
-​TARGET_USES_MKE2FS := true
+TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_FRAMERATE := 60
+TW_USE_FSCRYPT_POLICY := 2
 
 # Maintainer/Version
 TW_DEVICE_VERSION := Nomercy
