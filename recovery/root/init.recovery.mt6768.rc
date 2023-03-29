@@ -23,6 +23,10 @@ on fs
     mkdir /mnt/vendor/nvdata 0700 root root
     mkdir /mnt/vendor/nvcfg 0700 root root
     mkdir /mnt/vendor/persist 0700 root root
+    symlink /mnt/vendor/protect_f /vendor/protect_f
+    symlink /mnt/vendor/protect_s /vendor/protect_s
+    symlink /mnt/vendor/nvcfg /vendor/nvcfg
+    symlink /mnt/vendor/nvdata /vendor/nvdata
 
     install_keyring
 

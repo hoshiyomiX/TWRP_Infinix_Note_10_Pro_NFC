@@ -133,7 +133,6 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
@@ -150,20 +149,22 @@ RECOVERY_SDCARD_ON_DATA := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_INCLUDE_RESETPROP := true
-TW_USE_TOOLBOX := true
-TW_EXCLUDE_APEX := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
-TW_Y_OFFSET := 30
-TW_H_OFFSET := -60
+TW_Y_OFFSET := 100
+TW_H_OFFSET := -100
 TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_FRAMERATE := 60
+
+TARGET_SCREEN_HEIGHT := 1640
+
+BOARD_USES_MTK_HARDWARE := true
 
 # Maintainer/Version
 TW_DEVICE_VERSION := Nomercy
