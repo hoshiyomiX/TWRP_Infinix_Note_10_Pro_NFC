@@ -173,5 +173,5 @@ TARGET_USES_LOGD := true
 PLATFORM_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 20.1.0
 
-# Hack to get keymaster working
+# Hack to get keymaster to recognize the key files
 VENDOR_SECURITY_PATCH := 2021-08-01
