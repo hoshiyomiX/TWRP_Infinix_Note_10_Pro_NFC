@@ -37,10 +37,6 @@ PRODUCT_BRAND := Infinix
 PRODUCT_MODEL := Hot 10S
 PRODUCT_MANUFACTURER := Infinix
 
-# HACK: Set vendor patch level
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2099-12-31
-
 PRODUCT_GMS_CLIENTID_BASE := android-infinix
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
