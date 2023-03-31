@@ -5,7 +5,6 @@ on init
     setprop crypto.ready 1
 
 on fs
-
     install_keyring
 
 # We need vold early for metadata encryption
