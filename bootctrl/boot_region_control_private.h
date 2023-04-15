@@ -1,3 +1,5 @@
+#pragma once
+
 namespace android {
 namespace bootable {
 class BootControlExt {
