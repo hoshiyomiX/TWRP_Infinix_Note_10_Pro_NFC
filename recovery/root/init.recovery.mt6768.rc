@@ -56,7 +56,6 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     seclabel u:r:recovery:s0
 
 service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
-    interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
     disabled
@@ -91,5 +90,5 @@ on property:twrp.all.users.decrypted=true
     stop gatekeeper-1-0
     
 on boot
-    start boot-hal-1-1
+    start boot-hal-1-0
     start health-hal-2-1
