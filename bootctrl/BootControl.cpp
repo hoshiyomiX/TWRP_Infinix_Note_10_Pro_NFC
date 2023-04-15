@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,120 +13,85 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.boot@1.1-mtkimpl"
-
-#include <memory>
+#define LOG_TAG "android.hardware.boot@1.0-impl"
 
 #include <log/log.h>
 #include <android-base/logging.h>
 #include <bootloader_message/bootloader_message.h>
+#include <hardware/hardware.h>
+#include <hardware/boot_control.h>
 
 #include "BootControl.h"
 #include "boot_region_control_private.h"
 #include "boot_control_definition.h"
 
+#ifdef BOOT_CONTROL_RECOVERY
+extern const hw_module_t HAL_MODULE_INFO_SYM;
+#endif
+
 namespace android {
 namespace hardware {
 namespace boot {
-namespace V1_1 {
+namespace V1_0 {
 namespace implementation {
-
-using ::android::hardware::boot::V1_0::CommandResult;
-using namespace android::bootable;
-
-bool BootControl::Init() {
-    return impl_.Init();
+BootControl::BootControl(boot_control_module_t *module) : mModule(module){
 }
 
 // Methods from ::android::hardware::boot::V1_0::IBootControl follow.
-Return<uint32_t> BootControl::getNumberSlots() {
-    return impl_.GetNumberSlots();
+Return<uint32_t> BootControl::getNumberSlots()  {
+    return mModule->getNumberSlots(mModule);
 }
 
-Return<uint32_t> BootControl::getCurrentSlot() {
-    return impl_.GetCurrentSlot();
+Return<uint32_t> BootControl::getCurrentSlot()  {
+    return mModule->getCurrentSlot(mModule);
 }
 
-Return<void> BootControl::clearAvbbctlFlag() {
-  std::string err;
-  std::string device = get_bootloader_message_blk_device(&err);
-  if (device.empty()) {
-    LOG(ERROR) << "Could not find bootloader message block device: " << err;
-    return Void();
-  }
-
-  bootloader_control boot_ctrl;
-  if (!LoadBootloaderControl(device, &boot_ctrl)) {
-    LOG(ERROR) << "Failed to load bootloader control block";
-    return Void();
-  }
-
-  uint32_t computed_crc32 = BootloaderControlLECRC(&boot_ctrl);
-  if (boot_ctrl.crc32_le == computed_crc32 &&  boot_ctrl.reserved1[0] == 1) {
-    boot_ctrl.reserved1[0] = 0;
-    LOG(INFO) << "Clear avb boot control convert flag";
-    UpdateAndSaveBootloaderControl(device, &boot_ctrl);
-  }
-  return Void();
-}
-
-Return<void> BootControl::markBootSuccessful(markBootSuccessful_cb _hidl_cb) {
+Return<void> BootControl::markBootSuccessful(markBootSuccessful_cb _hidl_cb)  {
+    int ret = mModule->markBootSuccessful(mModule);
     struct CommandResult cr;
-    if (impl_.MarkBootSuccessful()) {
-        cr.success = true;
-        cr.errMsg = "Success";
-        clearAvbbctlFlag();
-    } else {
-        cr.success = false;
-        cr.errMsg = "Operation failed";
-    }
+    cr.success = (ret == 0);
+    cr.errMsg = strerror(-ret);
     _hidl_cb(cr);
     return Void();
 }
 
-Return<void> BootControl::setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb _hidl_cb) {
+Return<void> BootControl::setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb _hidl_cb)  {
+    int ret = mModule->setActiveBootSlot(mModule, slot);
     struct CommandResult cr;
-    if (impl_.SetActiveBootSlot(slot) && implext_.SetBootRegionSlot(slot)) {
-        cr.success = true;
-        cr.errMsg = "Success";
-    } else {
-        cr.success = false;
-        cr.errMsg = "Operation failed";
-    }
+    cr.success = (ret == 0);
+    cr.errMsg = strerror(-ret);
     _hidl_cb(cr);
     return Void();
 }
 
-Return<void> BootControl::setSlotAsUnbootable(uint32_t slot, setSlotAsUnbootable_cb _hidl_cb) {
+Return<void> BootControl::setSlotAsUnbootable(uint32_t slot, setSlotAsUnbootable_cb _hidl_cb)  {
+    int ret = mModule->setSlotAsUnbootable(mModule, slot);
     struct CommandResult cr;
-    if (impl_.SetSlotAsUnbootable(slot)) {
-        cr.success = true;
-        cr.errMsg = "Success";
-    } else {
-        cr.success = false;
-        cr.errMsg = "Operation failed";
-    }
+    cr.success = (ret == 0);
+    cr.errMsg = strerror(-ret);
     _hidl_cb(cr);
     return Void();
 }
 
-Return<BoolResult> BootControl::isSlotBootable(uint32_t slot) {
-    if (!impl_.IsValidSlot(slot)) {
+Return<BoolResult> BootControl::isSlotBootable(uint32_t slot)  {
+    int32_t ret = mModule->isSlotBootable(mModule, slot);
+    if (ret < 0) {
         return BoolResult::INVALID_SLOT;
     }
-    return impl_.IsSlotBootable(slot) ? BoolResult::TRUE : BoolResult::FALSE;
+    return ret ? BoolResult::TRUE : BoolResult::FALSE;
 }
 
-Return<BoolResult> BootControl::isSlotMarkedSuccessful(uint32_t slot) {
-    if (!impl_.IsValidSlot(slot)) {
+Return<BoolResult> BootControl::isSlotMarkedSuccessful(uint32_t slot)  {
+    int32_t ret = mModule->isSlotMarkedSuccessful(mModule, slot);
+    if (ret < 0) {
         return BoolResult::INVALID_SLOT;
     }
-    return impl_.IsSlotMarkedSuccessful(slot) ? BoolResult::TRUE : BoolResult::FALSE;
+    return ret ? BoolResult::TRUE : BoolResult::FALSE;
 }
 
-Return<void> BootControl::getSuffix(uint32_t slot, getSuffix_cb _hidl_cb) {
+Return<void> BootControl::getSuffix(uint32_t slot, getSuffix_cb _hidl_cb)  {
     hidl_string ans;
-    const char* suffix = impl_.GetSuffix(slot);
+    const char *suffix = mModule->getSuffix(mModule, slot);
     if (suffix) {
         ans = suffix;
     }
@@ -134,25 +99,38 @@ Return<void> BootControl::getSuffix(uint32_t slot, getSuffix_cb _hidl_cb) {
     return Void();
 }
 
-Return<bool> BootControl::setSnapshotMergeStatus(MergeStatus status) {
-    return impl_.SetSnapshotMergeStatus(status);
-}
-
-Return<MergeStatus> BootControl::getSnapshotMergeStatus() {
-    return impl_.GetSnapshotMergeStatus();
-}
-
-IBootControl* HIDL_FETCH_IBootControl(const char* /* hal */) {
-    auto module = std::make_unique<BootControl>();
-    if (!module->Init()) {
-        ALOGE("Could not initialize BootControl module");
+#ifdef BOOT_CONTROL_RECOVERY
+IBootControl* HIDL_FETCH_IBootControl(const char * /* hal */) {
+    boot_control_module_t* module;
+    // For devices that don't build a standalone libhardware bootctrl impl for recovery,
+    // we simulate the hw_get_module() by accessing it from the current process directly.
+    const hw_module_t* hw_module = &HAL_MODULE_INFO_SYM;
+    if (!hw_module ||
+        strcmp(BOOT_CONTROL_HARDWARE_MODULE_ID, hw_module->id) != 0) {
+        ALOGE("Error loading boot_control HAL implementation: %d.", -EINVAL);
         return nullptr;
     }
-    return module.release();
+    module = reinterpret_cast<boot_control_module_t*>(const_cast<hw_module_t*>(hw_module));
+    module->init(module);
+    return new BootControl(module);
 }
-
-}  // namespace implementation
-}  // namespace V1_1
+#else
+IBootControl* HIDL_FETCH_IBootControl(const char* /* hal */) {
+    int ret = 0;
+    boot_control_module_t* module = NULL;
+    hw_module_t **hwm = reinterpret_cast<hw_module_t**>(&module);
+    ret = hw_get_module(BOOT_CONTROL_HARDWARE_MODULE_ID, const_cast<const hw_module_t**>(hwm));
+    if (ret)
+    {
+        ALOGE("hw_get_module %s failed: %d", BOOT_CONTROL_HARDWARE_MODULE_ID, ret);
+        return nullptr;
+    }
+    module->init(module);
+    return new BootControl(module);
+}
+#endif
+} // namespace implementation
+}  // namespace V1_0
 }  // namespace boot
 }  // namespace hardware
 }  // namespace android
