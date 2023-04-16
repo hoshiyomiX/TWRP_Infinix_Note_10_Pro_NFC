@@ -79,7 +79,6 @@ TW_OVERRIDE_SYSTEM_PROPS := \
 # Fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
-    android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
     
 # OEM otacerts
