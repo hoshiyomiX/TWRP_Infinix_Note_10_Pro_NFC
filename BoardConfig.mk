@@ -29,7 +29,6 @@ TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
-TARGET_BOARD_SUFFIX := _64
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
 # APEX
@@ -134,6 +133,7 @@ TARGET_COPT_OUT_SYSTEM_EXT := system_ext
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
@@ -143,9 +143,6 @@ TARGET_RECOVERY_DEVICE_MODULES += \
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
-
-# Hardware
-BOARD_USES_MTK_HARDWARE := true
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi

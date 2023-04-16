@@ -5,7 +5,7 @@
 #include <android-base/logging.h>
 
 #if !defined(ARCH_X86)
-#include "mmc-mtk-ioctl.h"
+#include <mmc-mtk-ioctl.h>
 #include <sys/ioctl.h>
 #endif
 
