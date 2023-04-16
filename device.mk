@@ -81,7 +81,6 @@ TW_LOAD_VENDOR_MODULES := "chipone-tddi.bin ilitek_ts_fw.bin mt6631_fm_v1_patch.
 # Fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
-    android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
     
 # OEM otacerts
