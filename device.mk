@@ -52,7 +52,7 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.1-impl
     
 PRODUCT_PACKAGES_DEBUG += \
-    bootctrl
+    bootctrl.mt6768
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
