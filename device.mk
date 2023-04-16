@@ -57,6 +57,10 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
+# MTK PlPath Utils
+PRODUCT_PACKAGES += \
+    mtk_plpath_utils.recovery
+
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
