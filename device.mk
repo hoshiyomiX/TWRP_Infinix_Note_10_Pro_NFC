@@ -51,14 +51,14 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.1-impl-recovery
     
 PRODUCT_PACKAGES_DEBUG += \
-    bootctrl
-
-# MTK Plpath Utils
-PRODUCT_PACKAGES += \
-    mtk_plpath_utils.recovery
+    bootctrl.mt6768
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
+
+# MTK PlPath Utils
+PRODUCT_PACKAGES += \
+    mtk_plpath_utils.recovery
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -75,6 +75,8 @@ PRODUCT_SHIPPING_API_LEVEL := 30
 
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
+
+TW_LOAD_VENDOR_MODULES := "chipone-tddi.bin ilitek_ts_fw.bin mt6631_fm_v1_patch.bin mt6631_fm_v1_patch.bin"
 
 # Fastbootd
 PRODUCT_PACKAGES += \
