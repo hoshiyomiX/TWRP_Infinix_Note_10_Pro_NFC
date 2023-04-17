@@ -29,6 +29,7 @@ on fs
     symlink /mnt/vendor/protect_s /vendor/protect_s
     symlink /mnt/vendor/nvcfg /vendor/nvcfg
     symlink /mnt/vendor/nvdata /vendor/nvdata
+
     install_keyring
 
 service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
