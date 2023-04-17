@@ -16,7 +16,7 @@ fi
 
 if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export TW_DEFAULT_LANGUAGE="en"
-    export OF_DEVICE_ALT="X689,FULL-64"
+    export OF_DEVICE_ALT="X689B,FULL-64"
 	export LC_ALL="C"
 	export OF_AB_DEVICE=1
 	export FOX_EXTREME_SIZE_REDUCTION=1
@@ -65,7 +65,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_SKIP_FBE_DECRYPTION_SDKVERSION=34 # Don't try to decrypt A14(?)
     
 	# R11
-	export FOX_VERSION="R11.1_3"
+	export FOX_VERSION="R11.1_4"
 	export FOX_VARIANT=Stable
 	export OF_PATCH_AVB20=1
 	export OF_MAINTAINER="Nomercy"
