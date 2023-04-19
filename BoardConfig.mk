@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Allow building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
+
 DEVICE_PATH := device/infinix/X689
 
 # Architecture
@@ -70,7 +73,7 @@ TARGET_KERNEL_CONFIG := X689_defconfig
 TARGET_KERNEL_SOURCE := kernel/infinix/X689
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := Infinix-X689,Infinix-X689B,FULL-64
+TARGET_OTA_ASSERT_DEVICE := X689,X689B,FULL-64
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"

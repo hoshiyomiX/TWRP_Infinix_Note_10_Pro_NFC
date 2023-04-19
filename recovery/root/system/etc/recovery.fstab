@@ -1,11 +1,4 @@
-# 1 "vendor/mediatek/proprietary/hardware/fstab/mt6768/fstab.in.mt6768"
-# 1 "<built-in>" 1
-# 1 "<built-in>" 3
-# 341 "<built-in>" 3
-# 1 "<command line>" 1
-# 1 "<built-in>" 2
-# 1 "vendor/mediatek/proprietary/hardware/fstab/mt6768/fstab.in.mt6768" 2
-# 146 "vendor/mediatek/proprietary/hardware/fstab/mt6768/fstab.in.mt6768"
+# fstab
 system           /system         ext4    ro     wait,slotselect,logical
 system_ext       /system_ext     ext4    ro     wait,slotselect,logical
 vendor           /vendor         ext4    ro     wait,slotselect,logical
