@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/infinix/X689
+LOCAL_PATH := device/infinix/X695C
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
@@ -54,7 +54,7 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.1-impl-recovery
     
 PRODUCT_PACKAGES_DEBUG += \
-    bootctrl.mt6768
+    bootctrl.mt6765
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
