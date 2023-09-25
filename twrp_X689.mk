@@ -24,22 +24,22 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 # Virtual A/B OTA
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
-# Inherit from hot10s device
-$(call inherit-product, device/infinix/X689/device.mk)
+# Inherit from device
+$(call inherit-product, device/infinix/X695C/device.mk)
 
 # Inherit some common Twrp stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := X689
-PRODUCT_NAME := twrp_X689
+PRODUCT_DEVICE := X695C 
+PRODUCT_NAME := twrp_X695C
 PRODUCT_BRAND := Infinix
-PRODUCT_MODEL := Hot 10S
+PRODUCT_MODEL := Note 10 Pro NFC
 PRODUCT_MANUFACTURER := Infinix
 
 PRODUCT_GMS_CLIENTID_BASE := android-infinix
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="vnd_x689_h696-user 11 RP1A.200720.011 255364 release-keys"
+    PRIVATE_BUILD_DESC="vnd_x695_h854-user 11 RP1A.200720.011 156472 release-keys"
 
-BUILD_FINGERPRINT := Infinix/X689-GL/Infinix-X689:11/RP1A.200720.011/230224V538:user/release-keys
+BUILD_FINGERPRINT := Infinix/X695C-GL/Infinix-X695C:11/RP1A.200720.011/221114V356:user/release-keys
